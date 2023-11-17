@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "board.h"
 #include "game_constants.h"
 #include "game_state.h"

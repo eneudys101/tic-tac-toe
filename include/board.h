@@ -8,7 +8,6 @@ int check_col(GameState *, Player, int);
 int check_row(GameState *, Player, int);
 int check_diag(GameState *, Player);
 int check_anti_diag(GameState *, Player);
-char check_cell(GameState *, int, int);
 void clean_board(GameState *);
 
 #endif //BOARD_H

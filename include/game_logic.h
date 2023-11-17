@@ -6,6 +6,7 @@
 
 void init_game(GameState *);
 void game_loop(GameState *);
-int player_move(GameState *, Player, int);
+int play(GameState *, Player, int);
+int check_win(GameState *, Player);
 
 #endif //GAME_LOGIC_H

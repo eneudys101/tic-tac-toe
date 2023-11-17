@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int gameover = 0;
+#include "game_logic.h"
+
+
+/*int gameover = 0;
 int multiplayer = 0;
 int player1_score = 0;
 int player2_score = 0;
@@ -22,16 +25,17 @@ int check_col(char, int);
 int check_row(char, int);
 int check_diag(char);
 int check_anti_diag(char);
-
+*/
 int main()
 {
-    init_game();
-    game_loop();
-    
+    GameState * game_state_ptr = (GameState *) malloc(sizeof(GameState));
+    init_game(game_state_ptr);
+    game_loop(game_state_ptr);
+    free(game_state_ptr);
     return 0;
 }
 
-int is_empty(int col, int row){
+/*int is_empty(int col, int row){
     if(board[col-1][row-1] != 'X' && board[col-1][row-1] != 'O'){
         return 1;
     }
@@ -91,7 +95,7 @@ void player_move(char player)
 }
 
 
-/*
+
 Computer strategy
     Win: If the computer has two in a row, place the third to get three in a row.
     Block: If the opponent has two in a row, play the third to block them.
@@ -101,7 +105,7 @@ Computer strategy
     Opposite Corner: If the opponent is in the corner, play the opposite corner.
     Empty Corner: Play in a corner square.
     Empty Side: Play in a middle square on any of the 4 sides.
-*/
+
 void computer_move()
 {
     //Rows
@@ -259,76 +263,6 @@ void computer_move()
 
 }
 
-
-//Old algorithm. lol
-/*void computer_move()
-{   
-    for(int y = 0; y < 3; y++){
-        for(int x = 0; x < 3; x++){
-            int x_rn = (x + 1 > 2) ? 0: x + 1;
-            int x_ln = (x - 1 < 0) ? 2: x - 1;
-            int y_bn = (y + 1 > 2) ? 0: y + 1;
-            int y_tn = (y - 1 < 0) ? 2: y - 1;
-            
-            //play offense
-            if(board[x][y] == 'O'){
-                if(board[x_rn][y] == 'O' && board[x_ln][y] == '\0'){
-                    printf("A: (%d, %d)",x,y);
-                    board[x_ln][y] = 'O';
-                    return;
-                }else if(board[x][y_bn] == 'O' && board[x][y_tn] == '\0'){
-                    printf("B: (%d, %d)",x,y);
-                    board[x][y_tn] = 'O';
-                    return;
-                }else if(board[x_rn][y_bn] == 'O' && board[x_ln][y_tn] == '\0'){
-                    printf("C: (%d, %d)",x,y);
-                    board[x_ln][y_tn] = 'O';
-                    return;
-                }else if(board[x_rn][y_tn] == 'O' && board[x_ln][y_bn] == '\0'){
-                    printf("D: (%d, %d)",x,y);
-                    board[x_ln][y_bn] = 'O';
-                    return;
-                }
-
-            //play defense
-            }else if(board[x][y] == 'X' ){
-                if(board[x_rn][y] == 'X' && board[x_ln][y] == '\0'){
-                    printf("E: (%d, %d)",x,y);
-                    board[x_ln][y] = 'O';
-                    return;
-                }else if(board[x][y_bn] == 'X' && board[x][y_tn] == '\0'){
-                    printf("F: (%d, %d)",x,y);
-                    board[x][y_tn] = 'O';
-                    return;
-                }else if(board[x_rn][y_bn] == 'X' && board[x_ln][y_tn] == '\0'){
-                    printf("G: (%d, %d)",x,y);
-                    board[x_ln][y_tn] = 'O';
-                    return;
-                }else if(board[x_rn][y_tn] == 'X' && board[x_ln][y_bn] == '\0'){
-                    printf("H: (%d, %d)",x,y);
-                    board[x_ln][y_bn] = 'O';
-                    return;
-                }
-            }
-        }
-    }
-
-    if(board[1][1] == '\0'){
-        printf("I");
-        board[1][1] = 'O';
-        return;
-    }
-
-    for(int y = 0; y < 3; y++){
-        for(int x = 0; x < 3; x++){
-            if(board[x][y] == '\0'){
-                printf("J: (%d, %d)",x,y);
-                board[x][y] = 'O';
-                return;
-            }
-        }
-    }
-}*/
 
 int check_row(char player, int row)
 {
@@ -548,4 +482,4 @@ void game_loop()
     printf("Play again?\n");
     init_game();
     game_loop();
-}
+}*/
