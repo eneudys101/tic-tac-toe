@@ -6,7 +6,7 @@
 
 void init_game(GameState *);
 void game_loop(GameState *);
-int play(GameState *, Player, int);
-int check_win(GameState *, Player);
+int play(GameState *, CellState, int);
+int check_win(GameState *, CellState);
 
 #endif //GAME_LOGIC_H

@@ -11,11 +11,6 @@ typedef enum {
 } CellState;
 
 typedef enum {
-    PLAYER_1,
-    PLAYER_2
-} Player;
-
-typedef enum {
     GAME_ONGOING,
     GAME_WON,
     GAME_DRAWN

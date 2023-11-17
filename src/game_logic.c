@@ -7,7 +7,6 @@
 void init_game(GameState * state) 
 {
     char multiplayer_opt;
-    char mark_opt;
 
     clean_board(state);
 
@@ -32,32 +31,6 @@ void init_game(GameState * state)
     if(multiplayer_opt == 'y'){
         state->is_multiplayer = 1;
     }
-
-    do{
-        printf("Player 1 choose your mark(x/o): ");
-        int result = scanf(" %c", &mark_opt);
-        
-        while (getchar() != '\n' && result != EOF);
-
-        if (result != 1) {
-            printf("Error. Try again.\n");
-            // Depending on the situation you might want to exit or handle the error differently
-            continue;
-        }
-
-        // Check if the input is neither 'y' nor 'n'
-        if (mark_opt != 'x' && mark_opt != 'o') {
-            printf("Invalid input. Please enter 'x' or 'o'.\n");
-        }
-    }while(mark_opt != 'x' && mark_opt != 'o');
-
-    if(mark_opt == 'x'){
-        state->player1_mark = 'X';
-        state->player2_mark = 'O';
-    }else{
-        state->player1_mark = 'O';
-        state->player2_mark = 'X';
-    }
 }
 
 void game_loop(GameState * game)
@@ -66,11 +39,12 @@ void game_loop(GameState * game)
         if(game->is_multiplayer){
             draw_board();
             int space;
-            printf("Player 1 make your move: ");
+            printf("Player X make your move: ");
             scanf("%d", &space);
-            play(game, PLAYER_1, space); 
 
-            if(check_win(game, PLAYER_1)){
+            play(game, PLAYER_X, space); 
+
+            if(check_win(game, PLAYER_X)){
                 printf("Player 1 Won, Congratulations!\n");
                 game->status = GAME_WON;
                 break;
@@ -126,15 +100,16 @@ void game_loop(GameState * game)
     //game_loop();
 }
 
-int play(GameState * state, Player player, int board_space)
+int play(GameState * state, CellState player, int board_space)
 {
     int count = 0;
 
-    for(int col = 0; col < BOARD_COLS; col++){
-        for(int row = 0; row < BOARD_ROWS; row++){
+    for(int row = 0; row < BOARD_ROWS; row++){
+        for(int col = 0; col < BOARD_COLS; col++){
             if(count == board_space - 1){
-                if(state->board[col][row] != EMPTY){
-                    state->board[col][row] = player;
+                printf("Count: %d\n Row: %d\n Col: %d\n", count, row, col);
+                if(state->board[row][col] == EMPTY){
+                    state->board[row][col] = player;
                     return 1;
                 }else{
                     return 0;
@@ -145,7 +120,7 @@ int play(GameState * state, Player player, int board_space)
     }
 }
 
-int check_win(GameState * state, Player player)
+int check_win(GameState * state, CellState player)
 {
     for(int i = 0; i < BOARD_COLS; i++){
         //check rows

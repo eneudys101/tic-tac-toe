@@ -4,7 +4,7 @@
 #include "game_constants.h"
 #include "game_state.h"
 
-int check_col(GameState * state, Player player, int col)
+int check_col(GameState * state, CellState player, int col)
 {
     int count = 0;
     
@@ -16,7 +16,7 @@ int check_col(GameState * state, Player player, int col)
     return count;
 }
 
-int check_row(GameState * state, Player player, int row)
+int check_row(GameState * state, CellState player, int row)
 {
     int count = 0;
     
@@ -28,7 +28,7 @@ int check_row(GameState * state, Player player, int row)
     return count;
 }
 
-int check_diag(GameState * state, Player player)
+int check_diag(GameState * state, CellState player)
 {   
     int count = 0;
 
@@ -40,7 +40,7 @@ int check_diag(GameState * state, Player player)
     return count;   
 }
 
-int check_anti_diag(GameState * state, Player player)
+int check_anti_diag(GameState * state, CellState player)
 {
     int count = 0;
 
@@ -63,11 +63,11 @@ void clean_board(GameState * state)
 
 void draw_board(GameState * state)
 {
-    for(int col = 0; col < BOARD_COLS; col++){
+    for(int row = 0; row < BOARD_ROWS; row++){
         printf("+---+---+---+\n");
         printf("|");
 
-        for(int row = 0; row < BOARD_ROWS; row++){
+        for(int col = 0; col < BOARD_COLS; col++){
 
             switch (state->board[row][col])
             {
