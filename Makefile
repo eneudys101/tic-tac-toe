@@ -5,11 +5,13 @@ CFLAGS=-Iinclude    # Compiler flags
 SRC=$(wildcard src/*.c)
 # Convert .c filenames to .o
 OBJ=$(SRC:.c=.o)
+# Object files for the test, excluding main.o
+TEST_OBJ=$(filter-out src/main.o, $(OBJ))
 
 # Test source files
 TEST_SRC=$(wildcard tests/*.c)
 # Convert .c filenames to .o for tests
-TEST_OBJ=$(TEST_SRC:.c=.o)
+TEST_SRC_OBJ=$(TEST_SRC:.c=.o)
 # Test executable name
 TEST_EXEC=test-tic-tac-toe
 
@@ -22,10 +24,9 @@ tic-tac-toe: $(OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Target for running tests
-test: $(OBJ) $(TEST_OBJ)
+test: $(TEST_OBJ) $(TEST_SRC_OBJ)
 	$(CC) -o $(TEST_EXEC) $^
 	./$(TEST_EXEC)
-
 
 # Clean up the build: remove object files and the executable
 clean:
