@@ -9,7 +9,7 @@ void init_game(GameState * state)
     char multiplayer_opt;
 
     clean_board(state);
-
+    state->status = GAME_ONGOING;
     do{
         printf("Multiplayer? (y/n): ");
         int result = scanf(" %c", &multiplayer_opt);
@@ -29,14 +29,22 @@ void init_game(GameState * state)
     }while(multiplayer_opt != 'y' && multiplayer_opt != 'n');
 
     if(multiplayer_opt == 'y'){
-        state->is_multiplayer = 1;
+        state->players = MULTIPLAYER;
     }
 }
 
+
+
 void game_loop(GameState * game)
 {
-    while(game->status == GAME_ONGOING){  
-        if(game->is_multiplayer){
+    while(game->status == GAME_ONGOING){
+
+        switch (game->players)
+        {
+        case SINGLE_PLAYER:
+            break;
+
+        case MULTIPLAYER:
             draw_board();
             int space;
             printf("Player X make your move: ");
@@ -49,14 +57,8 @@ void game_loop(GameState * game)
                 game->status = GAME_WON;
                 break;
             }
-
-        // default case for testing. 
-        // this case should not happen if game is being played  
-        }else if(game->debug){
-            draw_board();
-            game->status = GAME_WON;
             break;
-        }
+        }  
     }
 
     draw_board();

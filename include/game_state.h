@@ -9,7 +9,8 @@ typedef struct game_state
     int player1_score;
     int player2_score;
     Status status;
-    int debug; 
+    Players players;
+    int game_debug; 
     CellState board[BOARD_ROWS][BOARD_COLS];
 }GameState;
 

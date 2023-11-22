@@ -16,4 +16,9 @@ typedef enum {
     GAME_DRAWN
 } Status;
 
+typedef enum {
+    MULTIPLAYER,
+    SINGLE_PLAYER
+}Players;
+
 #endif //GAME_CONSTANTS_H
