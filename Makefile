@@ -22,8 +22,8 @@ tic-tac-toe: $(OBJ)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Target for running tests
-test: $(TEST_OBJ)
-	$(CC) -o $(TEST_EXEC) $(TEST_OBJ)
+test: $(OBJ) $(TEST_OBJ)
+	$(CC) -o $(TEST_EXEC) $^
 	./$(TEST_EXEC)
 
 
