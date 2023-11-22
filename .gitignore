@@ -32,6 +32,7 @@ Thumbs.db
 ######################
 # e.g., config files, test outputs
 tic-tac-toe
+test-tic-tac-toe
 
 # Ignore log files and databases
 ######################

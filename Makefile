@@ -11,7 +11,7 @@ TEST_SRC=$(wildcard tests/*.c)
 # Convert .c filenames to .o for tests
 TEST_OBJ=$(TEST_SRC:.c=.o)
 # Test executable name
-TEST_EXEC=test_tic_tac_toe
+TEST_EXEC=test-tic-tac-toe
 
 # The default target: build the tic-tac-toe executable
 tic-tac-toe: $(OBJ)
