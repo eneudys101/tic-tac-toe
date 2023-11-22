@@ -3,11 +3,18 @@
 
 #include "game_logic.h"
 
+
 int main()
 {
+    //Initiate struct to store game data
     GameState * game_state_ptr = (GameState *) malloc(sizeof(GameState));
+
     init_game(game_state_ptr);
+
     game_loop(game_state_ptr);
+ 
     free(game_state_ptr);
     return 0;
 }
+
+

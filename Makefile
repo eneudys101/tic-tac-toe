@@ -6,6 +6,13 @@ SRC=$(wildcard src/*.c)
 # Convert .c filenames to .o
 OBJ=$(SRC:.c=.o)
 
+# Test source files
+TEST_SRC=$(wildcard tests/*.c)
+# Convert .c filenames to .o for tests
+TEST_OBJ=$(TEST_SRC:.c=.o)
+# Test executable name
+TEST_EXEC=test_tic_tac_toe
+
 # The default target: build the tic-tac-toe executable
 tic-tac-toe: $(OBJ)
 	$(CC) -o $@ $^
@@ -14,6 +21,12 @@ tic-tac-toe: $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
+# Target for running tests
+test: $(TEST_OBJ)
+	$(CC) -o $(TEST_EXEC) $(TEST_OBJ)
+	./$(TEST_EXEC)
+
+
 # Clean up the build: remove object files and the executable
 clean:
-	rm -f src/*.o tic-tac-toe
+	rm -f src/*.o tests/*.o $(TEST_EXEC) tic-tac-toe

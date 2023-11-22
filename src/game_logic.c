@@ -45,59 +45,23 @@ void game_loop(GameState * game)
             play(game, PLAYER_X, space); 
 
             if(check_win(game, PLAYER_X)){
-                printf("Player 1 Won, Congratulations!\n");
+                printf("Player X Won, Congratulations!\n");
                 game->status = GAME_WON;
                 break;
             }
-            /*if(check_draw()){
-                printf("Its a tie\n");
-                gameover = 1;
-                break;
-            }
-            computer_move();
-            if(check_win(player2)){
-                printf("Player %c Won, Try again!\n", player2);
-                gameover = 1;
-                break;
-            }
-            if(check_draw()){
-                printf("Its a tie\n");
-                gameover = 1;
-                break;
-            }*/
-        }/*else{
+
+        // default case for testing. 
+        // this case should not happen if game is being played  
+        }else if(game->debug){
             draw_board();
-            player_move(player1); 
-            if(check_win(player1)){
-                printf("Player %c Won, Congratulations!\n", player1);
-                gameover = 1;
-                break;
-            }
-            if(check_draw()){
-                printf("Its a tie\n");
-                gameover = 1;
-                break;
-            }
-            draw_board();
-            player_move(player2);
-            if(check_win(player1)){
-                printf("Player %c Won, Congratulations!\n", player2);
-                gameover = 1;
-                break;
-            }
-            if(check_draw()){
-                printf("Its a tie\n");
-                gameover = 1;
-                break;
-            }
-        }*/ 
+            game->status = GAME_WON;
+            break;
+        }
     }
 
     draw_board();
     printf("Game Over!\n");
     printf("Play again?\n");
-    //init_game();
-    //game_loop();
 }
 
 int play(GameState * state, CellState player, int board_space)
@@ -119,6 +83,8 @@ int play(GameState * state, CellState player, int board_space)
         }
     }
 }
+
+
 
 int check_win(GameState * state, CellState player)
 {

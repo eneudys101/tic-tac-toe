@@ -8,7 +8,8 @@ typedef struct game_state
     int is_multiplayer;
     int player1_score;
     int player2_score;
-    Status status; 
+    Status status;
+    int debug; 
     CellState board[BOARD_ROWS][BOARD_COLS];
 }GameState;
 
